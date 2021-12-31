@@ -14,7 +14,9 @@ if [ -d "$NEO_VIM_DIR_DEST" ]; then
 else
   echo "Symlinking neovim related folders..."
   ln -s $NEO_VIM_DIR_SOURCE $NEO_VIM_DIR_DEST
-  echo "You would still need to run the plug installs manually"
+  echo "You would still need to do the following:"
+  echo "1. Update the language server init options;"
+  echo "2. Install the plugins;"
 fi
 
 if [ -d "$TMUX_DIR_DEST" ]; then
