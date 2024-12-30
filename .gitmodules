@@ -1,3 +1,12 @@
 [submodule "nvim_config"]
 	path = nvim_config
 	url = https://github.com/f3lixding/neovimconfig
+[submodule "neovim_config"]
+	path = neovim_config
+	url = https://github.com/f3lixding/neovim_config
+[submodule "ghostty_config"]
+	path = ghostty_config
+	url = https://github.com/f3lixding/ghostty_config
+[submodule "tmux_conf"]
+	path = tmux_conf
+	url = https://github.com/f3lixding/tmux_conf
