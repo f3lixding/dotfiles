@@ -1,6 +1,3 @@
-[submodule "nvim_config"]
-	path = nvim_config
-	url = https://github.com/f3lixding/neovimconfig
 [submodule "neovim_config"]
 	path = neovim_config
 	url = https://github.com/f3lixding/neovim_config
