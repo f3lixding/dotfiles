@@ -21,6 +21,7 @@ bindkey '^R' fzf-history-widget
 # PATH
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+source ~/.api_keys
 
 # mise
 eval "$(mise activate zsh)"
