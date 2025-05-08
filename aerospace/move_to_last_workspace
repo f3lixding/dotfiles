@@ -1,0 +1,6 @@
+#! /bin/bash
+aerospace workspace-back-and-forth
+other=$(aerospace list-workspaces --focused)
+aerospace workspace-back-and-forth
+aerospace move-node-to-workspace "$other"
+aerospace workspace-back-and-forth
