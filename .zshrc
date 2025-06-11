@@ -21,6 +21,7 @@ bindkey '^R' fzf-history-widget
 # PATH
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/Users/felixding/.local/share/sokol:$PATH"
 source ~/.api_keys
 
 # mise
