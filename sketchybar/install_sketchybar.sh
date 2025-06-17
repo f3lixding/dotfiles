@@ -1,8 +1,10 @@
 echo "Installing Dependencies"
 # Packages
-brew install lua
-brew install switchaudio-osx
-brew install nowplaying-cli
+# brew install lua
+# This no longer works
+# brew install switchaudio-osx
+# This no longer works
+# brew install nowplaying-cli
 
 brew install sketchybar
 
