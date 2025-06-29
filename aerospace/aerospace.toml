@@ -200,6 +200,7 @@ automatically-unhide-macos-hidden-apps = false
         "exec-and-forget aerospace list-windows --all | grep -i wechat | awk '{print $1}' | xargs -I {} aerospace move-node-to-workspace --window-id {} M",
         "exec-and-forget aerospace list-windows --all | grep -i discord | awk '{print $1}' | xargs -I {} aerospace move-node-to-workspace --window-id {} 3",
         "exec-and-forget aerospace list-windows --all | grep -i ghostty | awk '{print $1}' | xargs -I {} aerospace move-node-to-workspace --window-id {} E",
+        "exec-and-forget aerospace list-windows --all | grep -i claude | awk '{print $1}' | xargs -I {} aerospace move-node-to-workspace --window-id {} C",
         "exec-and-forget sketchybar --trigger aerospace_mode_change",
         'mode main'
     ]
