@@ -59,12 +59,12 @@ automatically-unhide-macos-hidden-apps = false
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 7
-    inner.vertical =   7
-    outer.left =       7
-    outer.bottom =     7
-    outer.top =        [{ monitor."built-in" = 7 }, { monitor.main = 45 }, 7]
-    outer.right =      7
+    inner.horizontal = 10
+    inner.vertical =   10
+    outer.left =       10
+    outer.bottom =     10
+    outer.top =        [{ monitor."built-in" = 10 }, { monitor.main = 45 }, 10]
+    outer.right =      10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
