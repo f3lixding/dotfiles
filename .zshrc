@@ -26,3 +26,6 @@ source ~/.api_keys
 
 # mise
 eval "$(mise activate zsh)"
+
+# jj autocomplete
+eval "$(jj util completion zsh)"
