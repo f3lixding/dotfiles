@@ -11,6 +11,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Change introduced for learning jj
+# Another change introduced for learning jj
 # Override. Note that this function only works with robbyrussell theme
 git_prompt_info() {
     if [[ -d .jj ]]; then
