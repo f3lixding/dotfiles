@@ -15,7 +15,7 @@ source $ZSH/oh-my-zsh.sh
 bindkey -v
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 bindkey '^R' fzf-history-widget
 
 # PATH
