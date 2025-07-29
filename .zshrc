@@ -10,6 +10,7 @@ plugins=(git)
 # Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
+# Override. Note that this function only works with robbyrussell theme
 git_prompt_info() {
     if [[ -d .jj ]]; then
         # Get current bookmark, default to * if none
