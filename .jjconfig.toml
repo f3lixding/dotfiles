@@ -1,5 +1,6 @@
 [ui]
 diff-formatter = ["difft", "--color=always"]
+editor = "nvim"
 
 [aliases]
 dft = ["diff", "--tool", "difft"]
