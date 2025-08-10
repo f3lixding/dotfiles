@@ -72,6 +72,7 @@ automatically-unhide-macos-hidden-apps = false
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
+    alt-shift-ctrl-t = 'enable toggle'
 
     # All possible keys:
     # - Letters.        a, b, c, ..., z
