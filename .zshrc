@@ -45,10 +45,6 @@ git_prompt_info() {
 # e.g., enable vi mode
 bindkey -v
 
-# fzf
-source <(fzf --zsh)
-bindkey '^R' fzf-history-widget
-
 # PATH
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
@@ -57,6 +53,11 @@ source ~/.api_keys
 
 # mise
 eval "$(mise activate zsh)"
+
+# fzf
+source <(fzf --zsh)
+bindkey '^R' fzf-history-widget
+
 
 # jj autocomplete
 eval "$(jj util completion zsh)"
