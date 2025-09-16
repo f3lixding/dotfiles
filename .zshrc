@@ -48,6 +48,7 @@ bindkey -v
 # PATH
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/Cellar/zigup/2025.05.24/bin:$PATH"
 export PATH="/Users/felixding/.local/share/sokol:$PATH"
 source ~/.api_keys
 
