@@ -1,0 +1,168 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{ config, lib, pkgs, ... }:
+
+let 
+  zig-0-15-1 = pkgs.stdenv.mkDerivation {
+    pname = "zig";
+    version = "0.15.1";
+
+    src = pkgs.fetchurl {
+      url = "https://ziglang.org/download/0.15.1/zig-x86_64-linux-0.15.1.tar.xz";
+      sha256 = "01gyz8xjjj0qs0rxp0q34psrw67lqqh4apnd3sjlr8gfxnk5s766";
+    };
+    
+    dontBuild = true;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp -r lib $out/
+      cp -r doc $out/
+      cp zig $out/bin/
+    '';
+  };
+  
+  zls-0-15-0 = pkgs.stdenv.mkDerivation {
+    pname = "zls";
+    version = "0.15.0";
+
+    src = pkgs.fetchurl {
+      url = "https://builds.zigtools.org/zls-x86_64-linux-0.15.0.tar.xz";
+      sha256 = "1pih3bqb89mfbmf6h0vb243z8l83j2l7vz7k0wps1lipsqzzx2sh";
+    };
+
+    sourceRoot = ".";
+
+    dontBuild = true;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      # The tarball contains just the 'zls' binary
+      install -m755 zls $out/bin/zls
+    '';
+  };
+in
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # networking.hostName = "nixos"; # Define your hostname.
+  # Pick only one of the below networking options.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  
+  # Open ports in the firewall.
+  networking.firewall.allowedTCPPorts = [ 22 ]; # ssh
+  
+  # Set your time zone.
+  time.timeZone = "America/Los_Angeles";
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Audio
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.felix = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
+    ];
+    shell = pkgs.zsh;
+   };
+
+  environment.systemPackages = with pkgs; [
+    # DE related stuff
+    niri
+    waybar
+    wofi
+    mako
+    
+    # development tools
+    ghostty
+    tmux
+    neovim
+    git
+    jujutsu
+    wget
+    fzf
+    gcc
+    gnumake
+
+    # rust toolchain
+    rustup
+  ] ++ [
+    # zig toolchains
+    zig-0-15-1
+    zls-0-15-0
+  ];
+
+  programs.firefox.enable = true;
+  programs.niri.enable = true;
+
+  # shell
+  programs.zsh = {
+    enable = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [ "git" "sudo" ];
+    };
+  };
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+    };
+  };
+  
+  # login screen
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd niri-session";
+      };
+    };
+  };
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+  # to actually do that.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  system.stateVersion = "25.05"; # Did you read the comment?
+}
+
