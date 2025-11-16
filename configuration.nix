@@ -68,7 +68,11 @@ in
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ]; # ssh
+  networking.firewall.allowedTCPPorts = [ 
+    22     # ssh
+    57621  # for spotify to sync local tracks from fs with mobile devices on the same network 
+  ]; 
+  networking.firewall.allowedUDPPorts = [ 5353 ]; # enable discovery of google cast devices
   
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -115,6 +119,9 @@ in
     # chrome (because this is not a program for some reason)
     google-chrome
 
+    # media
+    spotify
+
     # rust toolchain
     rustup
   ] ++ [
@@ -153,6 +160,17 @@ in
 
   # desktop related
   programs.firefox.enable = true;
+  environment.sessionVariables = {
+    BROWSER = "firefox";
+  };
+
+  xdg.mime.defaultApplications = {
+    "text/html" = "firefox.desktop";
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
+    "x-scheme-handler/about" = "firefox.desktop";
+    "x-scheme-handler/unknown" = "firefox.desktop";
+  };
   programs.niri.enable = true;
   
   # steam
@@ -182,6 +200,13 @@ in
       pkgsi686Linux.vulkan-loader
     ];
   };
+
+  # fonts
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.hack
+  ];
 
 
   # Copy the NixOS configuration file and link it from the resulting system
