@@ -50,9 +50,17 @@ in
       ./hardware-configuration.nix
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
+  # Experimental features
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Power management
+  powerManagement.enable = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -90,6 +98,7 @@ in
     waybar
     wofi
     mako
+    xwayland-satellite
     
     # development tools
     ghostty
@@ -101,6 +110,10 @@ in
     fzf
     gcc
     gnumake
+    ripgrep
+
+    # chrome (because this is not a program for some reason)
+    google-chrome
 
     # rust toolchain
     rustup
@@ -109,9 +122,6 @@ in
     zig-0-15-1
     zls-0-15-0
   ];
-
-  programs.firefox.enable = true;
-  programs.niri.enable = true;
 
   # shell
   programs.zsh = {
@@ -140,6 +150,39 @@ in
       };
     };
   };
+
+  # desktop related
+  programs.firefox.enable = true;
+  programs.niri.enable = true;
+  
+  # steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
+  # graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      amdvlk
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-tools
+    ];
+    extraPackages32 = with pkgs; [
+      pkgsi686Linux.amdvlk
+      pkgsi686Linux.vulkan-loader
+    ];
+  };
+
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

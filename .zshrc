@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 
 # Set theme (choose your favorite)
 ZSH_THEME="robbyrussell"
@@ -8,7 +8,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 # Source Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Override. Note that this function only works with robbyrussell theme
 git_prompt_info() {
@@ -50,10 +50,10 @@ export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/Cellar/zigup/2025.05.24/bin:$PATH"
 export PATH="/Users/felixding/.local/share/sokol:$PATH"
-source ~/.api_keys
+# source ~/.api_keys
 
 # mise
-eval "$(mise activate zsh)"
+# eval "$(mise activate zsh)"
 
 # fzf
 source <(fzf --zsh)
