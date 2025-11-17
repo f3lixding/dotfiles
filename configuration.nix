@@ -52,6 +52,9 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  # firmware update
+  services.fwupd.enable = true;
+
   # Experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -61,6 +64,15 @@ in
 
   # Power management
   powerManagement.enable = true;
+  powerManagement.powerDownCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r mt7925e
+  '';
+  powerManagement.powerUpCommands = ''
+    ${pkgs.kmod}/bin/modprobe mt7925e
+  '';
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+  '';
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -103,6 +115,7 @@ in
     wofi
     mako
     xwayland-satellite
+    wpaperd
     
     # development tools
     ghostty
@@ -121,6 +134,9 @@ in
 
     # media
     spotify
+
+    # hardware related
+    usbutils
 
     # rust toolchain
     rustup
@@ -164,6 +180,7 @@ in
     BROWSER = "firefox";
   };
 
+  # Set default browser
   xdg.mime.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
