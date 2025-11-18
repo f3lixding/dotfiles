@@ -1,0 +1,29 @@
+# Positioning
+anchor=top-right
+margin=10
+
+# Appearance
+font=monospace 10
+background-color=#2e3440
+text-color=#d8dee9
+border-color=#88c0d0
+border-size=2
+border-radius=5
+padding=10
+
+# Behavior
+default-timeout=5000
+ignore-timeout=0
+
+# Dimensions
+width=300
+height=100
+max-visible=5
+
+# Icons
+icons=1
+max-icon-size=64
+icon-path=/usr/share/icons/Papirus-Dark
+
+# Grouping
+group-by=app-name
