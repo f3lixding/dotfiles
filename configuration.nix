@@ -174,6 +174,7 @@ in
     mako
     xwayland-satellite
     wpaperd
+    bibata-cursors
     
     # development tools
     ghostty
