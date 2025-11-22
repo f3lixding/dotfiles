@@ -1,14 +1,16 @@
-# Path to your oh-my-zsh installation
-# export ZSH="$HOME/.oh-my-zsh"
-
-# Set theme (choose your favorite)
 ZSH_THEME="robbyrussell"
-
-# Enable plugins (add the ones you used before)
 plugins=(git)
 
-# Source Oh My Zsh
-# source $ZSH/oh-my-zsh.sh
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    IS_MACOS=true
+else
+    IS_MACOS=false
+fi
+
+if [[ "$IS_MACOS" == true ]]; then
+    export ZSH="$HOME/.oh-my-zsh"
+    source $ZSH/oh-my-zsh.sh
+fi
 
 # Override. Note that this function only works with robbyrussell theme
 git_prompt_info() {
@@ -61,4 +63,6 @@ bindkey '^R' fzf-history-widget
 
 
 # jj autocomplete
+autoload -Uz compinit
+compinit
 eval "$(jj util completion zsh)"

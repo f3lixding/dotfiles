@@ -1,0 +1,24 @@
+# fonts
+font-family = "JetBrains Mono"
+font-size = 15
+adjust-cell-width = -15%
+font-feature = -calt
+
+# cursor
+mouse-hide-while-typing = true
+macos-option-as-alt = false
+cursor-color = #8EC07C
+
+# themes
+theme = "Gruvbox Dark"
+background-opacity = 0.95
+background-blur-radius = 10
+
+# window
+macos-titlebar-style = hidden
+macos-icon = blueprint 
+
+# shaders
+# custom-shader = shaders/bloom.glsl
+# custom-shader = shaders/sparks-from-fire.glsl
+custom-shader = shaders/cursor-smear.glsl
