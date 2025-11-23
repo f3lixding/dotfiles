@@ -199,6 +199,7 @@ in
     gnumake
     ripgrep
     nixd
+    lua-language-server
 
     # chrome (because this is not a program for some reason)
     google-chrome
