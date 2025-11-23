@@ -4,16 +4,17 @@
 
 { config, lib, pkgs, ... }:
 
-let 
+let
   zig-0-15-1 = pkgs.stdenv.mkDerivation {
     pname = "zig";
     version = "0.15.1";
 
     src = pkgs.fetchurl {
-      url = "https://ziglang.org/download/0.15.1/zig-x86_64-linux-0.15.1.tar.xz";
+      url =
+        "https://ziglang.org/download/0.15.1/zig-x86_64-linux-0.15.1.tar.xz";
       sha256 = "01gyz8xjjj0qs0rxp0q34psrw67lqqh4apnd3sjlr8gfxnk5s766";
     };
-    
+
     dontBuild = true;
 
     installPhase = ''
@@ -23,7 +24,7 @@ let
       cp zig $out/bin/
     '';
   };
-  
+
   zls-0-15-0 = pkgs.stdenv.mkDerivation {
     pname = "zls";
     version = "0.15.0";
@@ -46,66 +47,66 @@ let
 
   spine-fhs = pkgs.buildFHSEnv {
     name = "spine";
-    
-    targetPkgs = pkgs: (with pkgs; [
-      # Java
-      jdk17
-      
-      # X11 libraries - these provide the .so files
-      xorg.libX11
-      xorg.libXext
-      xorg.libXi
-      xorg.libXtst
-      xorg.libXrender
-      xorg.libXrandr
-      xorg.libXxf86vm
-      xorg.libXcursor
-      xorg.libXinerama
-      xorg.xdpyinfo
-      xorg.xrandr
-      
-      # OpenGL/Mesa
-      libGL
-      libGLU
-      mesa
-      
-      # Audio
-      alsa-lib
-      libpulseaudio
-      
-      # Other deps
-      freetype
-      fontconfig
-      zlib
-      glib
-      gtk3
-      cairo
-      pango
-      atk
-      gdk-pixbuf
-      
-      # C++ stdlib
-      stdenv.cc.cc.lib
-    ]);
-    
-    multiPkgs = pkgs: (with pkgs; [
-      # 32-bit libraries that might be needed
-      libGL
-      libGLU
-    ]);
-    
+
+    targetPkgs = pkgs:
+      (with pkgs; [
+        # Java
+        jdk17
+
+        # X11 libraries - these provide the .so files
+        xorg.libX11
+        xorg.libXext
+        xorg.libXi
+        xorg.libXtst
+        xorg.libXrender
+        xorg.libXrandr
+        xorg.libXxf86vm
+        xorg.libXcursor
+        xorg.libXinerama
+        xorg.xdpyinfo
+        xorg.xrandr
+
+        # OpenGL/Mesa
+        libGL
+        libGLU
+        mesa
+
+        # Audio
+        alsa-lib
+        libpulseaudio
+
+        # Other deps
+        freetype
+        fontconfig
+        zlib
+        glib
+        gtk3
+        cairo
+        pango
+        atk
+        gdk-pixbuf
+
+        # C++ stdlib
+        stdenv.cc.cc.lib
+      ]);
+
+    multiPkgs = pkgs:
+      (with pkgs; [
+        # 32-bit libraries that might be needed
+        libGL
+        libGLU
+      ]);
+
     runScript = "bash -c 'cd ~/.cache/spine/Spine && ./Spine.sh'";
-    
+
     profile = ''
       export LD_LIBRARY_PATH=/usr/lib:/usr/lib32
     '';
   };
-in
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+in {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # compatibility related
   nixpkgs.config.allowUnfree = true;
@@ -134,27 +135,23 @@ in
 
   # Allow qmk firmware to be recognized
   services.udev = {
-    packages = with pkgs; [
-      qmk
-      qmk-udev-rules
-      qmk_hid
-      via
-      vial
-    ]; 
-  }; 
+    packages = with pkgs; [ qmk qmk-udev-rules qmk_hid via vial ];
+  };
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 
-    22     # ssh
-    57621  # for spotify to sync local tracks from fs with mobile devices on the same network 
-  ]; 
-  networking.firewall.allowedUDPPorts = [ 5353 ]; # enable discovery of google cast devices
-  
+  networking.firewall.allowedTCPPorts = [
+    22 # ssh
+    57621 # for spotify to sync local tracks from fs with mobile devices on the same network
+  ];
+  networking.firewall.allowedUDPPorts =
+    [ 5353 ]; # enable discovery of google cast devices
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -171,58 +168,58 @@ in
   users.users.felix = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-    ];
+    packages = with pkgs; [ tree ];
     shell = pkgs.zsh;
-   };
+  };
 
-  environment.systemPackages = with pkgs; [
-    # DE related stuff
-    niri
-    waybar
-    wofi
-    mako
-    xwayland-satellite
-    wpaperd
-    bibata-cursors
-    
-    # development tools
-    ghostty
-    tmux
-    neovim
-    git
-    jujutsu
-    wget
-    fzf
-    gcc
-    gnumake
-    ripgrep
-    nixd
-    lua-language-server
+  environment.systemPackages = with pkgs;
+    [
+      # DE related stuff
+      niri
+      waybar
+      wofi
+      mako
+      xwayland-satellite
+      wpaperd
+      bibata-cursors
 
-    # chrome (because this is not a program for some reason)
-    google-chrome
+      # development tools
+      ghostty
+      tmux
+      neovim
+      git
+      jujutsu
+      wget
+      fzf
+      gcc
+      gnumake
+      ripgrep
+      nixd
+      nixfmt
+      lua-language-server
 
-    # media
-    spotify
-    vesktop
-    wechat
-    plex-desktop
+      # chrome (because this is not a program for some reason)
+      google-chrome
 
-    # hardware related
-    usbutils
+      # media
+      spotify
+      vesktop
+      wechat
+      plex-desktop
 
-    # rust toolchain
-    rustup
-  ] ++ [
-    # zig toolchains
-    zig-0-15-1
-    zls-0-15-0
+      # hardware related
+      usbutils
 
-    # spine wrapper
-    spine-fhs
-  ];
+      # rust toolchain
+      rustup
+    ] ++ [
+      # zig toolchains
+      zig-0-15-1
+      zls-0-15-0
+
+      # spine wrapper
+      spine-fhs
+    ];
 
   # shell
   programs.zsh = {
@@ -237,11 +234,9 @@ in
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    settings = {
-      PasswordAuthentication = true;
-    };
+    settings = { PasswordAuthentication = true; };
   };
-  
+
   # login screen
   services.greetd = {
     enable = true;
@@ -254,9 +249,7 @@ in
 
   # desktop related
   programs.firefox.enable = true;
-  environment.sessionVariables = {
-    BROWSER = "firefox";
-  };
+  environment.sessionVariables = { BROWSER = "firefox"; };
 
   # Set default browser
   xdg.mime.defaultApplications = {
@@ -267,7 +260,7 @@ in
     "x-scheme-handler/unknown" = "firefox.desktop";
   };
   programs.niri.enable = true;
-  
+
   # steam
   programs.steam = {
     enable = true;
@@ -302,7 +295,6 @@ in
     nerd-fonts.fira-code
     nerd-fonts.hack
   ];
-
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
