@@ -198,6 +198,7 @@ in
     gcc
     gnumake
     ripgrep
+    nixd
 
     # chrome (because this is not a program for some reason)
     google-chrome
@@ -206,6 +207,7 @@ in
     spotify
     vesktop
     wechat
+    plex-desktop
 
     # hardware related
     usbutils
