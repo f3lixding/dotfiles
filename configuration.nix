@@ -187,9 +187,11 @@ in {
       ghostty
       tmux
       neovim
+      claude-code
       git
       jujutsu
       wget
+      difftastic
       fzf
       gcc
       gnumake
