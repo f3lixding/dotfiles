@@ -10,7 +10,7 @@ macos-option-as-alt = false
 cursor-color = #8EC07C
 
 # themes
-theme = "GruvboxDark"
+theme = "Gruvbox Dark"
 background-opacity = 0.95
 background-blur-radius = 10
 

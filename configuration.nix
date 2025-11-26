@@ -103,6 +103,8 @@ let
       export LD_LIBRARY_PATH=/usr/lib:/usr/lib32
     '';
   };
+
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -184,7 +186,7 @@ in {
       bibata-cursors
 
       # development tools
-      ghostty
+      unstable.ghostty
       tmux
       neovim
       claude-code
