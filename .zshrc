@@ -14,6 +14,11 @@ fi
 
 # Override. Note that this function only works with robbyrussell theme
 git_prompt_info() {
+    local nix_indicator=""
+    if [[ -n "$IN_NIX_SHELL" ]]; then
+        nix_indicator="%{$fg_bold[green]%}(nix)%{$reset_color%} "
+    fi
+    
     if [[ -d .jj ]]; then
         # Get current bookmark, default to * if none
         local bookmark=$(jj bookmark list --revisions @ 2>/dev/null | head -1 | awk -F: '{print $1}')
@@ -29,8 +34,7 @@ git_prompt_info() {
         else
             jj_status=")%{$reset_color%} "
         fi
-
-        echo "%{$fg_bold[blue]%}jj:(%{$fg_bold[red]%}$bookmark%{$fg_bold[blue]%}$jj_status"
+        echo "${nix_indicator}%{$fg_bold[blue]%}jj:(%{$fg_bold[red]%}$bookmark%{$fg_bold[blue]%}$jj_status"
     else
         # Fall back to original git behavior
         command git rev-parse --git-dir &> /dev/null || return 0
@@ -39,7 +43,7 @@ git_prompt_info() {
         ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
         ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
         
-        echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+        echo "${nix_indicator}$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
     fi
 }
 
