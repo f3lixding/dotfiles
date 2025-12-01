@@ -206,7 +206,7 @@ in {
       google-chrome
 
       # media
-      spotify
+      unstable.spotify
       vesktop
       wechat
       plex-desktop
