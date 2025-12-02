@@ -1,0 +1,4 @@
+[default]
+path = "~/.cache/wallpaper/"
+sorting = "random"
+duration = "30m"
