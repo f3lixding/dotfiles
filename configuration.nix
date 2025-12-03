@@ -7,12 +7,12 @@
 let
   zig-0-15-1 = pkgs.stdenv.mkDerivation {
     pname = "zig";
-    version = "0.15.1";
+    version = "0.15.2";
 
     src = pkgs.fetchurl {
       url =
-        "https://ziglang.org/download/0.15.1/zig-x86_64-linux-0.15.1.tar.xz";
-      sha256 = "01gyz8xjjj0qs0rxp0q34psrw67lqqh4apnd3sjlr8gfxnk5s766";
+        "https://ziglang.org/builds/zig-x86_64-linux-0.16.0-dev.1484+d0ba6642b.tar.xz";
+      sha256 = "0yrf9avjmj7lw9dwiqgczgz1s4r0cwx2ipdip6ls8kkfvqn5i41z";
     };
 
     dontBuild = true;
@@ -201,6 +201,7 @@ in {
       nixd
       nixfmt
       lua-language-server
+      nitch
 
       # chrome (because this is not a program for some reason)
       google-chrome
@@ -228,6 +229,9 @@ in {
   # shell
   programs.zsh = {
     enable = true;
+    interactiveShellInit = ''
+      nitch
+    '';
     ohMyZsh = {
       enable = true;
       theme = "robbyrussell";
