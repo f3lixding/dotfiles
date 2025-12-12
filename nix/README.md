@@ -17,6 +17,8 @@ Modules are evaluated with `libs.evalModules`
 - The functions are evaluated with [these args](https://nixos.org/manual/nixpkgs/stable/#module-system-module-arguments)
 - As the doc has specified, the modules are [merged](https://nixos.org/manual/nixpkgs/stable/#module-system-lib-evalModules-param-modules). This is important because each function is evalauted with the merged modules.
 
+You can define options without defining values for them in the config. But you cannot do the reverse.
+
 # Lazy Evaluation
 This is how the nix engine evaluate things - Values do not get filled in until the attributes is used. 
 This allows you to do some circular dependencies: 

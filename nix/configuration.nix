@@ -202,6 +202,7 @@ in {
       nixfmt
       lua-language-server
       nitch
+      yazi
 
       # chrome (because this is not a program for some reason)
       google-chrome
