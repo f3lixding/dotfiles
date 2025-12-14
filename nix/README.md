@@ -1,3 +1,27 @@
+# Overview and docs 
+In general I find nix docs to be a shitshow. The docs are just all over the place and extremely fragmented. 
+It helps to navigate if the general categories of concerns are first understood: 
+
+1. Nix Manual - The Nix package manager itself
+- https://nixos.org/manual/nix/stable/
+- Covers: nix commands, language basics, store, derivations
+
+2. Nixpkgs Manual - Package collection and build helpers
+- https://nixos.org/manual/nixpkgs/stable/
+- Covers: stdenv.mkDerivation, overlays, cross-compilation, pkgs.write* functions
+
+3. NixOS Manual - The Linux distribution
+- https://nixos.org/manual/nixos/stable/
+- Covers: module system, lib.types, configuration.nix, services
+
+4. Nix Pills - Tutorial series
+- https://nixos.org/guides/nix-pills/
+- Covers: learning Nix from scratch, derivation internals
+
+5. nix.dev - Community-maintained learning resource
+- https://nix.dev/
+- Covers: tutorials, guides, best practices
+
 # Modules
 These are largely taken from https://nix.dev/tutorials/module-system/deep-dive of things that I find noteworthy
 
@@ -115,6 +139,31 @@ in {
 
 The imported attribute set is merged with `options` and `config`.
 
+# String interpolation
+`${}` expands the expression passed to it. 
+The actual expansion logic depends on what is passed to it: 
+```nix
+# Strings - just inserts the value
+name = "felix";
+"Hello ${name}"  # => "Hello felix"
+
+# Numbers - converts to string
+count = 42;
+"Count: ${toString count}"  # Need toString for numbers
+
+# Paths - converts to string path
+myPath = ./some/file;
+"${myPath}"  # => "/nix/store/...-some-file" (copies to store)
+
+# Derivations - converts to output path
+drv = pkgs.hello;
+"${drv}/bin/hello"  # => "/nix/store/...-hello-2.x/bin/hello"
+
+# Lists/attrsets - error (must convert first)
+"${[1 2 3]}"  # ERROR
+"${toString [1 2 3]}"  # => "1 2 3"
+```
+
 # Lazy Evaluation
 This is how the nix engine evaluate things - Values do not get filled in until the attributes is used. 
 This allows you to do some circular dependencies: 
@@ -135,3 +184,15 @@ let
 in
   finalConfig
 ```
+
+This is somewhat tricky to think about. An easy way to just "accept" it is to think of the lazily evaluated value as values that you will eventually end up with.
+
+# REPL
+`nix repl` is how you can explore modules and derivations imperatively.
+
+[Documentation](https://nix.dev/manual/nix/2.24/command-ref/new-cli/nix3-repl)
+
+You can view the available variables after loading with `:l` with the following:
+- `<TAB>`
+- And you can print what they are with typing out their variable names
+- If you wish to see what attributes they have, do it with `builtins.attrNames ${variable}`
