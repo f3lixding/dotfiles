@@ -1,0 +1,7 @@
+{
+  "enable_build_on_save": true,
+  "build_on_save_step": "check",
+  "global_cache_path": "/home/felix/.cache/zig",
+  "log_level": "debug",
+  "dangerous_comptime_experiments_do_not_enable": false
+}
