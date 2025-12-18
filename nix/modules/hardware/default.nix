@@ -11,8 +11,12 @@
   powerManagement.powerUpCommands = ''
     ${pkgs.kmod}/bin/modprobe mt7925e
   '';
+  powerManagement.cpuFreqGovernor = "performance";
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+    # VIA keyboard support
+    KERNEL=="hidraw*", ATTRS{idVendor}=="a8f8", MODE="0666", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="a8f8", MODE="0666", TAG+="uaccess"
   '';
 
   # networking.hostName = "nixos"; # Define your hostname.
@@ -30,9 +34,13 @@
     [ 5353 ]; # enable discovery of google cast devices
 
   # Allow qmk firmware to be recognized
+  hardware.keyboard.qmk.enable = true;
   services.udev = {
     packages = with pkgs; [ qmk qmk-udev-rules qmk_hid via vial ];
   };
+
+  # Add user to input group for VIA access
+  users.users.felix.extraGroups = [ "input" ];
 
   # Audio
   services.pipewire = {
