@@ -65,7 +65,7 @@ output "HDMI-A-1" {
 }
 
 cursor {
-  xcursor-theme "Bibata-Original-Amber"
+  xcursor-theme "Bibata-Modern-Classic"
   xcursor-size 48
 }
 
