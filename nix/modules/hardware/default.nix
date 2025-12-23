@@ -19,6 +19,8 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="a8f8", MODE="0666", TAG+="uaccess"
   '';
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
