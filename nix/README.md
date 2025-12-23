@@ -196,3 +196,42 @@ You can view the available variables after loading with `:l` with the following:
 - `<TAB>`
 - And you can print what they are with typing out their variable names
 - If you wish to see what attributes they have, do it with `builtins.attrNames ${variable}`
+
+# MediaTek WiFi
+So this is specific to the framework desktop, which uses a MediaTek mt7925e WiFi. 
+The mt7925e is notoriously aggresive about roaming (i.e. where it switches from one access point to another). And every time this happens, there is a 200 to 500 ms where packets are lost.
+What this looks like when you are using any application that requires to have a constant connection (i.e. games) is server side stuttering. 
+And you can see this by looking at the kernal log: 
+```
+dmesg -w
+```
+
+And this will show up as something like this: 
+```
+[  440.809628] wlp192s0: disconnect from AP xxxxx for new auth to xxxxx
+```
+
+To combat this, the roaming needs to be turned off: 
+```
+// First we need to find the network interface being used:
+// The return of which shall be referred to as $netint
+ip link show 
+
+// And then we will need to see the access point it is connected to
+// The return of which shall be referred to as $ap
+nix-shell -p wirelesstools --command "iwconfig $netint"
+
+// Find the BSSID (Basic Service Set Identifier. It is the MAC address of a specific WiFi access point's radio)
+// The answer of which shall be referred to as $bssid
+nmcli connection show $SSID | grep bssid
+
+// Explicitly specify the AP:
+sudo nmcli connection modify $SSID $bssid $ap
+// Shut it down
+sudo nmcli connection down $SSID
+// Bring it back up again
+sudo nmcli connection up $SSID
+
+// And then verify this was changed 
+nmcli connection show $SSID | grep bssid
+```
