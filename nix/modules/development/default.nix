@@ -22,6 +22,7 @@ in {
     nitch
     yazi
     rustup
+    tree-sitter
   ];
 
   # shell
