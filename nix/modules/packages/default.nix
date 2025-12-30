@@ -22,6 +22,7 @@ in {
     wechat
     plex-desktop
     unstable.firefox
+    unstable.bluebubbles
 
     # hardware related
     usbutils
