@@ -65,6 +65,8 @@ export PATH="/Users/felixding/.local/share/sokol:$PATH"
 source <(fzf --zsh)
 bindkey '^R' fzf-history-widget
 
+# editor
+export EDITOR=nvim
 
 # jj autocomplete
 autoload -Uz compinit
