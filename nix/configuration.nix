@@ -2,7 +2,9 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, unstable, ... }: {
+  # in an module evaluation (which is the way this file will be consumed) imports are 
+  # passed to it the parent level args
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./modules

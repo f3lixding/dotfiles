@@ -1,6 +1,4 @@
-{ config, lib, pkgs, ... }:
-let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in {
+{ config, lib, pkgs, unstable, ... }: {
   imports = [ ./zig.nix ];
 
   environment.systemPackages = with pkgs; [
