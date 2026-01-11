@@ -5,7 +5,7 @@
     unstable.ghostty
     tmux
     neovim
-    claude-code
+    unstable.claude-code
     git
     jujutsu
     wget
@@ -21,6 +21,7 @@
     yazi
     rustup
     tree-sitter
+    unstable.opencode
   ];
 
   # shell
