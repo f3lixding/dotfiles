@@ -12,7 +12,7 @@
     # This means you can use these attr set like so: import nixpkgs-unstable { system = "x86_64-linux" }
     # Note that nixpkgs is already imported with system resolved (done by nixpkgs.lib.nixosSystem)
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, ... }:
