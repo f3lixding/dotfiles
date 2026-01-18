@@ -27,21 +27,19 @@ let
 
   zls-latest = pkgs.stdenv.mkDerivation {
     pname = "zls";
-    version = "0.15.0";
+    version = "0.15.1";
 
     src = builtins.fetchTarball {
       url = "https://github.com/zigtools/zls/releases/download/0.15.1/zls-x86_64-linux.tar.xz";
       sha256 = "1w00vdf0yb3q7avpdzgwifjvld4bx4snfbj27y02ha9br5lw6ibd";
     };
 
-    sourceRoot = ".";
-
     dontBuild = true;
 
     installPhase = ''
       mkdir -p $out/bin
       # The tarball contains just the 'zls' binary
-      install -m755 $src/zls $out/bin/zls
+      install -m755 zls $out/bin/zls
     '';
   };
 in
