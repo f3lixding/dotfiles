@@ -11,7 +11,7 @@
     # See https://discourse.nixos.org/t/get-flake-input-store-path/20202
     # This means you can use these attr set like so: import nixpkgs-unstable { system = "x86_64-linux" }
     # Note that nixpkgs is already imported with system resolved (done by nixpkgs.lib.nixosSystem)
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 

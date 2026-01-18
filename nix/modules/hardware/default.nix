@@ -67,14 +67,10 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
       vulkan-loader
       vulkan-validation-layers
       vulkan-tools
     ];
-    extraPackages32 = with pkgs; [
-      pkgsi686Linux.amdvlk
-      pkgsi686Linux.vulkan-loader
-    ];
+    extraPackages32 = with pkgs; [ pkgsi686Linux.vulkan-loader ];
   };
 }
