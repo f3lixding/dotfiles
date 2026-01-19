@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -24,8 +30,7 @@
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   networking.networkmanager.wifi.powersave = false;
 
   # Open ports in the firewall.
@@ -33,14 +38,37 @@
     22 # ssh
     57621 # for spotify to sync local tracks from fs with mobile devices on the same network
   ];
-  networking.firewall.allowedUDPPorts =
-    [ 5353 ]; # enable discovery of google cast devices
+  networking.firewall.allowedUDPPorts = [ 5353 ]; # enable discovery of google cast devices
 
   # Allow qmk firmware to be recognized
   hardware.keyboard.qmk.enable = true;
   services.udev = {
-    packages = with pkgs; [ qmk qmk-udev-rules qmk_hid via vial ];
+    packages = with pkgs; [
+      qmk
+      qmk-udev-rules
+      qmk_hid
+      via
+      vial
+    ];
   };
+
+  # btusb would need to load _after_ mediatek
+  # This is because the mt7925 is a ombo chip and it handles both WiFi and
+  # Bluethooth on the same physical hardware.
+  # Should btusb load before the WiFi driver has fully initialized the
+  # firmware, it will try to talk to a Bluetooth controller that isn't ready
+  # yet.
+  # What this looks like is the following (in the kernal log)
+  # ```
+  # sudo dmesg | grep -i bluetooth
+  # sudo dmesg | grep -i mt7925
+  # ...
+  # Bluetooth: hci0: Execution of wmt command timed out
+  # Bluetooth: hci0: Failed to send wmt func ctrl (-110)
+  # ```
+  boot.extraModprobeConfig = ''
+    softdep btusb pre: mt7925e
+  '';
 
   # Add user to input group for VIA access
   users.users.felix.extraGroups = [ "input" ];
