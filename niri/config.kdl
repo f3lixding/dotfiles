@@ -239,6 +239,7 @@ xwayland-satellite {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 spawn-at-startup "wpaperd"
+spawn-at-startup "sh" "-c" "wl-paste --watch cliphist store"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -601,6 +602,9 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    // clipboard management
+    Mod+Shift+C { spawn "sh" "-c" "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
 }
 
 // The order matters here

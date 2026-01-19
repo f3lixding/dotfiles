@@ -1,8 +1,15 @@
-{ config, lib, pkgs, unstable, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
+{
   imports = [ ./spine.nix ];
 
   environment.systemPackages = with pkgs; [
-    # DE 
+    # DE
     niri
     waybar
     wofi
@@ -10,6 +17,8 @@
     xwayland-satellite
     wpaperd
     bibata-cursors
+    cliphist
+    wl-clipboard
 
     # chrome (because this is not a program for some reason)
     google-chrome
@@ -27,7 +36,9 @@
   ];
 
   # desktop related
-  environment.sessionVariables = { BROWSER = "firefox"; };
+  environment.sessionVariables = {
+    BROWSER = "firefox";
+  };
 
   # Set default browser
   xdg.mime.defaultApplications = {
@@ -56,4 +67,3 @@
     nerd-fonts.hack
   ];
 }
-
