@@ -6,7 +6,10 @@
   ...
 }:
 {
-  imports = [ ./spine.nix ];
+  imports = [
+    ./spine.nix
+    ./clawdbot.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     # DE

@@ -1,4 +1,11 @@
-{ config, lib, pkgs, unstable, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
+{
   imports = [ ./zig.nix ];
 
   environment.systemPackages = with pkgs; [
@@ -6,6 +13,7 @@
     tmux
     neovim
     unstable.claude-code
+    unstable.pnpm
     git
     jujutsu
     wget
@@ -33,7 +41,10 @@
     ohMyZsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [ "git" "sudo" ];
+      plugins = [
+        "git"
+        "sudo"
+      ];
     };
   };
 }
