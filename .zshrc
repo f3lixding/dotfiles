@@ -56,6 +56,7 @@ export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/Cellar/zigup/2025.05.24/bin:$PATH"
 export PATH="/Users/felixding/.local/share/sokol:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 # source ~/.api_keys
 
 # mise
@@ -72,3 +73,10 @@ export EDITOR=nvim
 autoload -Uz compinit
 compinit
 eval "$(jj util completion zsh)"
+
+# bun completions
+[ -s "/Users/felixding/.bun/_bun" ] && source "/Users/felixding/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
