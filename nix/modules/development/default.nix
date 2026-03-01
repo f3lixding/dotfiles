@@ -13,6 +13,7 @@
     tmux
     neovim
     unstable.claude-code
+    unstable.codex
     unstable.pnpm
     git
     jujutsu
