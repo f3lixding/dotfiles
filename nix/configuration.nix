@@ -2,19 +2,34 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, unstable, ... }: {
-  # in an module evaluation (which is the way this file will be consumed) imports are 
+{
+  config,
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
+{
+  # in an module evaluation (which is the way this file will be consumed) imports are
   # passed to it the parent level args
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./modules
   ];
+
+  # nixpath
+  nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
+  nix.channel.enable = false;
 
   # compatibility related
   nixpkgs.config.allowUnfree = true;
 
   # Experimental features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -22,7 +37,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.felix = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ tree ];
     shell = pkgs.zsh;
   };
@@ -30,7 +48,9 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    settings = { PasswordAuthentication = true; };
+    settings = {
+      PasswordAuthentication = true;
+    };
   };
 
   # login screen
@@ -67,4 +87,3 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-
