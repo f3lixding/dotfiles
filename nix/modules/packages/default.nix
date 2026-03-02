@@ -33,6 +33,7 @@
     plex-desktop
     unstable.firefox
     unstable.bluebubbles
+    unstable.zoom-us
 
     # hardware related
     usbutils
