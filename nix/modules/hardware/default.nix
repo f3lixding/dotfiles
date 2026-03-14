@@ -37,6 +37,7 @@
   networking.firewall.allowedTCPPorts = [
     22 # ssh
     57621 # for spotify to sync local tracks from fs with mobile devices on the same network
+    8888 # waterbot
   ];
   networking.firewall.allowedUDPPorts = [ 5353 ]; # enable discovery of google cast devices
 
