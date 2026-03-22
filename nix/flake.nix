@@ -13,9 +13,17 @@
     # Note that nixpkgs is already imported with system resolved (done by nixpkgs.lib.nixosSystem)
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-index-database.url = "github:nix-community/nix-index-database";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      nix-index-database,
+      ...
+    }:
     let
       hostname = "nixos";
       system = "x86_64-linux";
@@ -23,11 +31,15 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit unstable; };
-        modules = [ ./configuration.nix ];
+        modules = [
+          ./configuration.nix
+          nix-index-database.nixosModules.default
+        ];
       };
     };
 }
