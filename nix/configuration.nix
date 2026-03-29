@@ -19,6 +19,25 @@
   ];
 
   # Avoid registry and NIX_PATH indirection; use explicit flake refs instead.
+  # Since we are configuring nixos with a flake, having multiple layers
+  # introduces multiple sources of truth and in my experience that actually
+  # introduces a lot of confusion.
+  # With this set up, instead of using registry names, we would need to either
+  # explicitly state the urls or be in the flake dir:
+  # The clean way to search them is:
+  #
+  # nix search --inputs-from . nixpkgs <term>
+  # nix search --inputs-from . nixpkgs-unstable <term>
+  #
+  # Examples:
+  #
+  # nix search --inputs-from . nixpkgs firefox
+  # nix search --inputs-from . nixpkgs-unstable firefox
+  #
+  # If you want to see whether a specific package differs between the two, query the version directly:
+  #
+  # nix eval --raw --inputs-from . nixpkgs#neovim.version
+  # nix eval --raw --inputs-from . nixpkgs-unstable#neovim.version
   nixpkgs.flake.setFlakeRegistry = false;
   nixpkgs.flake.setNixPath = false;
   nix.channel.enable = false;
