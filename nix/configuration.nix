@@ -18,9 +18,11 @@
     ./modules
   ];
 
-  # nixpath
-  nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
+  # Avoid registry and NIX_PATH indirection; use explicit flake refs instead.
+  nixpkgs.flake.setFlakeRegistry = false;
+  nixpkgs.flake.setNixPath = false;
   nix.channel.enable = false;
+  nix.settings.flake-registry = "";
 
   # compatibility related
   nixpkgs.config.allowUnfree = true;
