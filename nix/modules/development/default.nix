@@ -11,7 +11,7 @@
   environment.systemPackages = with pkgs; [
     unstable.ghostty
     tmux
-    neovim
+    unstable.neovim
     unstable.claude-code
     unstable.codex
     unstable.pnpm
