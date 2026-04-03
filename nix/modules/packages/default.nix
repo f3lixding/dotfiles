@@ -9,6 +9,7 @@
   imports = [
     ./spine.nix
     ./clawdbot.nix
+    ./gazebo.nix
   ];
 
   environment.systemPackages = with pkgs; [
