@@ -15,6 +15,7 @@
     unstable.claude-code
     unstable.codex
     unstable.pnpm
+    unstable.pyright
     git
     jujutsu
     wget
