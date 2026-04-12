@@ -16,6 +16,7 @@
     unstable.codex
     unstable.pnpm
     unstable.pyright
+    unstable.direnv
     git
     jujutsu
     wget
