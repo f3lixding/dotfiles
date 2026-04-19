@@ -18,6 +18,7 @@
     unstable.pyright
     unstable.direnv
     unstable.clang-tools
+    unstable.cmake
     git
     jujutsu
     wget
