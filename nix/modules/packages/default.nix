@@ -28,7 +28,6 @@
     google-chrome
 
     # media
-    unstable.spotify
     vesktop
     wechat
     plex-desktop
