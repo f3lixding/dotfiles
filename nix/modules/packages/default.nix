@@ -34,6 +34,7 @@
     unstable.firefox
     unstable.bluebubbles
     unstable.zoom-us
+    unstable.spotify
 
     # hardware related
     usbutils
