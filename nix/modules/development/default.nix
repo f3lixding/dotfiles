@@ -14,6 +14,7 @@
     unstable.neovim
     unstable.claude-code
     unstable.codex
+    unstable.pi-coding-agent
     unstable.pnpm
     unstable.pyright
     unstable.direnv
