@@ -6,7 +6,10 @@
   ...
 }:
 {
-  imports = [ ./zig.nix ];
+  imports = [
+    ./zig.nix
+    ./tuicr.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     unstable.ghostty
