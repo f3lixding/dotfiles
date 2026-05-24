@@ -35,6 +35,7 @@
     unstable.bluebubbles
     unstable.zoom-us
     unstable.spotify
+    unstable.kooha
 
     # hardware related
     usbutils
