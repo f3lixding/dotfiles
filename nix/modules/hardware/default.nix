@@ -27,11 +27,41 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  networking.networkmanager.wifi.powersave = false;
+  networking.networkmanager = {
+    enable = true; # Easiest to use and most distros use this by default.
+    wifi.powersave = false;
+
+    # Keep a stable identity on the LAN. If WiFi MAC randomization or changing
+    # DHCP client IDs make the router issue different leases, SSH appears to
+    # "rotate" between IPs. Use the hardware MAC and MAC-based DHCP IDs.
+    settings = {
+      device."wifi.scan-rand-mac-address" = "no";
+      connection = {
+        "wifi.cloned-mac-address" = "permanent";
+        "ethernet.cloned-mac-address" = "permanent";
+        "ipv6.addr-gen-mode" = "stable-privacy";
+      };
+      ipv4."dhcp-client-id" = "mac";
+    };
+  };
+
+  # Advertise this machine as nixos.local, so you can use:
+  #   ssh felix@nixos.local
+  # instead of depending on whatever IPv4 lease the router assigned.
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [

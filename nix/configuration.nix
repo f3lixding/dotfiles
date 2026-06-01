@@ -70,7 +70,16 @@
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PubkeyAuthentication = true;
+
+      # Keep idle SSH sessions from silently freezing/dropping on flaky WiFi or
+      # NAT/router idle timeouts. The server will send a keepalive every 30s and
+      # disconnect only after 2 minutes without a response.
+      TCPKeepAlive = true;
+      ClientAliveInterval = 30;
+      ClientAliveCountMax = 4;
     };
   };
 
