@@ -56,6 +56,7 @@
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
+    allowInterfaces = [ "enp191s0" ]; # otherwise we would have name collision and the name would just change
     publish = {
       enable = true;
       addresses = true;
