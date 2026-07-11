@@ -8,7 +8,6 @@
 {
   imports = [
     ./zig.nix
-    ./tuicr.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -23,6 +22,7 @@
     unstable.direnv
     unstable.clang-tools
     unstable.cmake
+    unstable.tuicr
     git
     jujutsu
     wget
