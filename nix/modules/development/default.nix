@@ -23,6 +23,7 @@
     unstable.clang-tools
     unstable.cmake
     unstable.tuicr
+    unstable.godot_4_7
     git
     jujutsu
     wget
