@@ -8,7 +8,6 @@
 {
   imports = [
     ./spine.nix
-    ./clawdbot.nix
     ./gazebo.nix
   ];
 
