@@ -24,6 +24,7 @@
     unstable.cmake
     unstable.tuicr
     unstable.godot_4_7
+    unstable.btop
     git
     jujutsu
     wget
