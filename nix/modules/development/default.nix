@@ -25,6 +25,7 @@
     unstable.tuicr
     unstable.godot_4_7
     unstable.btop
+    unstable.blender
     git
     jujutsu
     wget
