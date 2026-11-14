@@ -7,8 +7,8 @@
   "tui.altScreen.previousPrompt": "alt+p",
   "tui.altScreen.nextPrompt": "alt+n",
   "tui.altScreen.search": "alt+s",
-  "tui.altScreen.searchNext": "alt+f",
-  "tui.altScreen.searchPrevious": "alt+b",
+  "tui.altScreen.searchNext": "ctrl+n",
+  "tui.altScreen.searchPrevious": "ctrl+p",
   "tui.altScreen.top": "alt+g",
   "tui.altScreen.bottom": "alt+l"
 }
