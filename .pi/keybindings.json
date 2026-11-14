@@ -6,6 +6,9 @@
   "tui.altScreen.halfPageDown": "alt+d",
   "tui.altScreen.previousPrompt": "alt+p",
   "tui.altScreen.nextPrompt": "alt+n",
+  "tui.altScreen.search": "alt+s",
+  "tui.altScreen.searchNext": "alt+f",
+  "tui.altScreen.searchPrevious": "alt+b",
   "tui.altScreen.top": "alt+g",
   "tui.altScreen.bottom": "alt+l"
 }
