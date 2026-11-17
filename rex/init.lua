@@ -11,6 +11,7 @@ rex.bind("ctrl+b", "client.mode.enter", {
 rex.bind("tmux/ctrl+b", "pane.send_key", {
   key = "ctrl+b",
 })
+rex.bind("tmux/q", "client.mode.exit")
 
 -- Tabs (tmux windows)
 -- tmux windows map to Rex tabs
