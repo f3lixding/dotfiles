@@ -1,5 +1,11 @@
 -- tmux-style key bindings for Rex.
 -- Press Ctrl-b, release it, then press one of the keys below.
+--
+-- Rex client font settings (stored in macOS preferences, not init.lua):
+--   family: JetBrains Mono
+--   size: 15 pt
+--   character spacing: -15.0%
+--   ligatures: disabled
 
 rex.mode("tmux")
 rex.mode("copy")
