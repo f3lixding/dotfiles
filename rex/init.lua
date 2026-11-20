@@ -57,6 +57,10 @@ rex.bind("tmux/o", "pane.focus_next")
 rex.bind("tmux/x", "pane.close")
 rex.bind("tmux/z", "pane.zoom")
 rex.bind("tmux/space", "pane.balance")
+rex.bind("tmux/shift+[", "pane.move.left")
+rex.bind("tmux/shift+]", "pane.move.right")
+rex.bind("tmux/shift+9", "pane.move.up")
+rex.bind("tmux/shift+0", "pane.move.down")
 
 -- Pane focus: arrows and Vim keys
 rex.bind("tmux/left", "pane.focus.left")
