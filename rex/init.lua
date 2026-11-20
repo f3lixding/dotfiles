@@ -30,7 +30,6 @@ rex.bind("tmux/ctrl+n", "client.tab.next")
 rex.bind("tmux/ctrl+p", "client.tab.previous")
 rex.bind("tmux/g", "session.switch")
 rex.bind("tmux/s", "session.switch")
-rex.bind("tmux/ctrl+o", "session.previous")
 
 -- Copy mode: Ctrl-b [ enters Rex's tmux-style keyboard copy mode.
 -- Rex provides q/Escape to exit, v for character selection, and Ctrl-v for
