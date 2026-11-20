@@ -8,7 +8,6 @@
 --   ligatures: disabled
 
 rex.mode("tmux")
-rex.mode("copy")
 
 -- Prefix
 rex.bind("ctrl+b", "client.mode.enter", {
@@ -33,14 +32,11 @@ rex.bind("tmux/g", "session.switch")
 rex.bind("tmux/s", "session.switch")
 rex.bind("tmux/ctrl+o", "session.previous")
 
--- Scrollback mode: Ctrl-b [ enters; q or Escape exits.
-rex.bind("tmux/[", "client.mode.enter", { name = "copy" })
-rex.bind("copy/ctrl+u", "client.scroll.page_up")
-rex.bind("copy/ctrl+d", "client.scroll.page_down")
-rex.bind("copy/page_up", "client.scroll.page_up")
-rex.bind("copy/page_down", "client.scroll.page_down")
-rex.bind("copy/q", "client.mode.exit")
-rex.bind("copy/escape", "client.mode.exit")
+-- Copy mode: Ctrl-b [ enters Rex's tmux-style keyboard copy mode.
+-- Rex provides q/Escape to exit, v for character selection, and Ctrl-v for
+-- block selection. Match tmux's Shift-Enter binding by copying without exit.
+rex.bind("tmux/[", "pane.copy_mode.enter")
+rex.bind("shift+enter", "pane.copy")
 
 rex.bind("tmux/0", "client.tab.goto", { index = 0 })
 rex.bind("tmux/1", "client.tab.goto", { index = 1 })
